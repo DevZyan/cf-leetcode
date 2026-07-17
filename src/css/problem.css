@@ -220,7 +220,7 @@ html[data-cf-theme].cflc-split .cflc-pane-right-header {
   border-radius: var(--cflc-radius-md) var(--cflc-radius-md) 0 0;
   color: var(--cflc-text-muted);
   display: flex;
-  font-size: var(--cflc-fs-xs);
+  font-size: 11px;
   font-weight: var(--cflc-fw-medium);
   gap: var(--cflc-space-2);
   justify-content: space-between;
@@ -231,6 +231,7 @@ html[data-cf-theme].cflc-split .cflc-pane-right-header {
 
 html[data-cf-theme].cflc-split .cflc-pane-right-header a {
   color: var(--cflc-text-subtle);
+  font-size: 11px;
   text-transform: none;
 }
 
@@ -243,27 +244,59 @@ html[data-cf-theme].cflc-split .cflc-pane-body {
   flex: 1;
   flex-direction: column;
   min-height: 0;
-  overflow: auto;
+  overflow: hidden;
   padding: var(--cflc-space-3);
 }
 
 /*
- * The form arrives styled as a narrow sidebar widget — CF sets a fixed em width
- * on it and lays it out with a table. Let it fill the pane instead.
+ * Codeforces' form puts its hidden inputs — including `source` — directly on
+ * the <form>, with the table of visible controls after them. So once `source`
+ * becomes our textarea it is a sibling of that table, and column order alone
+ * gives us "code fills the pane, controls sit underneath".
  */
 html[data-cf-theme].cflc-split .cflc-pane-body form.submitForm {
   display: flex;
   flex: 1;
   flex-direction: column;
+  gap: var(--cflc-space-2);
   min-height: 0;
   width: auto !important;
 }
 
-html[data-cf-theme].cflc-split .cflc-pane-body .table-form {
-  display: flex;
+html[data-cf-theme].cflc-split .cflc-source {
+  background: var(--cflc-surface-sunken);
+  border: var(--cflc-border-width) solid var(--cflc-border);
+  border-radius: var(--cflc-radius-sm);
+  color: var(--cflc-text);
   flex: 1;
-  flex-direction: column;
-  min-height: 0;
+  min-height: 200px;
+  padding: var(--cflc-space-3);
+  resize: none;
+  tab-size: 4;
+  white-space: pre;
+  width: 100%;
+
+  /*
+   * px, not rem. Codeforces sets a 62.5% root font-size, so every rem here
+   * would resolve against a 10px base and render at ~62% of its intended size.
+   * This is our own element, so it carries its own type.
+   */
+  font-family: var(--cflc-font-mono);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/*
+ * The controls table becomes a single wrapping toolbar under the editor.
+ * `display: contents` on tbody/tr drops the table's row boxes so each cell
+ * becomes a flex item, without touching the markup CF's JS walks.
+ */
+html[data-cf-theme].cflc-split .cflc-pane-body .table-form {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: var(--cflc-space-2);
   width: 100% !important;
 }
 
@@ -274,35 +307,46 @@ html[data-cf-theme].cflc-split .cflc-pane-body tr {
 
 html[data-cf-theme].cflc-split .cflc-pane-body td {
   display: block;
-  padding: var(--cflc-space-1) 0;
+  margin: 0;
+  padding: 0;
+  width: auto;
 }
 
-/* The row holding the textarea is the one that should absorb spare height. */
-html[data-cf-theme].cflc-split .cflc-pane-body td:has(> .cflc-source) {
-  display: flex;
-  flex: 1;
-  min-height: 0;
+html[data-cf-theme].cflc-split .cflc-pane-body td.field {
+  color: var(--cflc-text-subtle);
+  font-size: 12px;
+  white-space: nowrap;
 }
 
-html[data-cf-theme].cflc-split .cflc-source {
-  background: var(--cflc-surface-sunken);
-  border: var(--cflc-border-width) solid var(--cflc-border);
-  border-radius: var(--cflc-radius-sm);
-  color: var(--cflc-text);
-  flex: 1;
-  font-family: var(--cflc-font-mono);
-  font-size: var(--cflc-fs-sm);
-  line-height: 1.5;
-  min-height: 300px;
-  padding: var(--cflc-space-3);
-  resize: none;
-  tab-size: 4;
-  white-space: pre;
-  width: 100%;
+/* The PyPy hint is a full sentence — give it its own line rather than let it
+   stretch the toolbar. */
+html[data-cf-theme].cflc-split .cflc-pane-body td:has(.programTypeNotice) {
+  flex: 1 0 100%;
+}
+
+html[data-cf-theme].cflc-split .cflc-pane-body .programTypeNotice {
+  color: var(--cflc-text-subtle);
+  font-size: 12px;
+}
+
+html[data-cf-theme].cflc-split .cflc-pane-body td:has(> .submit) {
+  margin-left: auto;
 }
 
 html[data-cf-theme].cflc-split .cflc-pane-body .submit {
-  width: 100%;
+  font-size: 13px;
+  padding: var(--cflc-space-2) var(--cflc-space-5);
+}
+
+/* CF centers the button inside a wrapper div and hangs a loading gif off it. */
+html[data-cf-theme].cflc-split .cflc-pane-body td > div {
+  text-align: right !important;
+}
+
+html[data-cf-theme].cflc-split .cflc-pane-body input[type='file'] {
+  color: var(--cflc-text-subtle);
+  font-size: 12px;
+  max-width: 200px;
 }
 
 html[data-cf-theme].cflc-split .cflc-pane-fallback {

@@ -59,7 +59,19 @@
   --cflc-danger: #ff375f;
   --cflc-info: #4d9de0;
 
-  /* ---- Typography ---- */
+  /*
+   * ---- Typography ----
+   *
+   * WARNING: the `--cflc-fs-*` scale is rem-based and is only safe on our own
+   * pages (options, docs/palette.html). Codeforces sets a 62.5% root font-size
+   * — its markup is full of `font-size: 1.1rem` for ordinary body text — so on
+   * a CF page 1rem is 10px and every token here renders at ~62% of its intended
+   * size. `--cflc-fs-sm` came out at 8px in the submit pane before this was
+   * understood.
+   *
+   * Rule: any element WE inject into a Codeforces page sizes itself in px.
+   * CF's own elements keep CF's type and are not sized here at all.
+   */
   --cflc-font-ui:
     system-ui, -apple-system, 'Segoe UI', roboto, 'Helvetica Neue', arial, 'Noto Sans',
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';

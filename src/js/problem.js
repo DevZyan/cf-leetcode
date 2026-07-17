@@ -145,7 +145,6 @@
 
     const onMove = (e) => {
       if (!dragging) return;
-      // Pointer events would be captured by the iframe mid-drag.
       e.preventDefault();
       const rect = root.getBoundingClientRect();
       setRatio((e.clientX - rect.left) / rect.width);
@@ -166,7 +165,6 @@
       dragging = true;
       e.preventDefault();
       gutter.classList.add('cflc-dragging');
-      // Stops the iframe from swallowing the drag once the cursor is over it.
       document.body.style.userSelect = 'none';
     });
 
@@ -184,6 +182,11 @@
   }
 
   function initSplit(problem) {
+    // Refuse to build a second pane: guards against the script running twice
+    // and against two copies of the extension being installed at once (each
+    // injects its own content script; the second sees this and bails).
+    if (document.querySelector('.cflc-split-root')) return;
+
     const pageContent = document.getElementById('pageContent');
     if (!pageContent || !pageContent.querySelector('.problem-statement')) return;
 
@@ -215,11 +218,8 @@
   /* --------------------------------------------------------------- run --- */
 
   function run() {
-    // Inside our own pane this document is the submit page, not a problem page.
-    if (window !== window.top) {
-      if (/\/submit(\/|$)/.test(location.pathname)) initFrame();
-      return;
-    }
+    // Only the top document hosts the split; nothing to do in frames.
+    if (window !== window.top) return;
 
     const problem = resolveProblem();
     if (!problem) return;
