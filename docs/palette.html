@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en" data-cf-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>cf-leetcode — design tokens</title>
+    <link rel="stylesheet" href="../src/css/tokens.css" />
+    <style>
+      body {
+        margin: 0;
+        background: var(--cflc-bg);
+        color: var(--cflc-text);
+        font-family: var(--cflc-font-ui);
+        font-size: var(--cflc-fs-base);
+        line-height: var(--cflc-lh-base);
+      }
+
+      .page {
+        max-width: var(--cflc-content-max);
+        margin: 0 auto;
+        padding: var(--cflc-space-6) var(--cflc-space-4);
+      }
+
+      header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--cflc-space-4);
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: var(--cflc-space-6);
+        padding-bottom: var(--cflc-space-4);
+        border-bottom: var(--cflc-border-width) solid var(--cflc-border);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: var(--cflc-fs-xl);
+        font-weight: var(--cflc-fw-bold);
+        line-height: var(--cflc-lh-tight);
+      }
+
+      h2 {
+        margin: var(--cflc-space-6) 0 var(--cflc-space-3);
+        font-size: var(--cflc-fs-md);
+        font-weight: var(--cflc-fw-medium);
+        color: var(--cflc-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-size: var(--cflc-fs-xs);
+      }
+
+      .lede {
+        margin: 0;
+        color: var(--cflc-text-subtle);
+        font-size: var(--cflc-fs-sm);
+      }
+
+      button {
+        padding: var(--cflc-space-2) var(--cflc-space-4);
+        border: var(--cflc-border-width) solid var(--cflc-border-strong);
+        border-radius: var(--cflc-radius-sm);
+        background: var(--cflc-surface-raised);
+        color: var(--cflc-text);
+        font: inherit;
+        font-weight: var(--cflc-fw-medium);
+        cursor: pointer;
+        transition: background var(--cflc-transition);
+      }
+
+      button:hover {
+        background: var(--cflc-surface-hover);
+      }
+
+      button:focus-visible {
+        outline: 2px solid var(--cflc-focus-ring);
+        outline-offset: 1px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: var(--cflc-space-3);
+      }
+
+      .swatch {
+        border: var(--cflc-border-width) solid var(--cflc-border);
+        border-radius: var(--cflc-radius-md);
+        overflow: hidden;
+        background: var(--cflc-surface);
+      }
+
+      .swatch .chip {
+        height: 64px;
+        border-bottom: var(--cflc-border-width) solid var(--cflc-border);
+      }
+
+      .swatch .meta {
+        padding: var(--cflc-space-2) var(--cflc-space-3);
+      }
+
+      .swatch .name {
+        font-family: var(--cflc-font-mono);
+        font-size: var(--cflc-fs-xs);
+      }
+
+      .swatch .val {
+        color: var(--cflc-text-subtle);
+        font-family: var(--cflc-font-mono);
+        font-size: var(--cflc-fs-xs);
+      }
+
+      /* Layer demo: the four surfaces stacked as they'd actually nest. */
+      .layers {
+        padding: var(--cflc-space-4);
+        border: var(--cflc-border-width) solid var(--cflc-border);
+        border-radius: var(--cflc-radius-lg);
+        background: var(--cflc-bg);
+      }
+
+      .layers > div {
+        padding: var(--cflc-space-4);
+        border: var(--cflc-border-width) solid var(--cflc-border);
+        border-radius: var(--cflc-radius-md);
+      }
+
+      .layer-surface {
+        background: var(--cflc-surface);
+      }
+
+      .layer-raised {
+        background: var(--cflc-surface-raised);
+      }
+
+      .layer-sunken {
+        background: var(--cflc-surface-sunken);
+        font-family: var(--cflc-font-mono);
+        font-size: var(--cflc-fs-sm);
+      }
+
+      .pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--cflc-space-2);
+        align-items: center;
+      }
+
+      .pill {
+        padding: var(--cflc-space-1) var(--cflc-space-3);
+        border-radius: var(--cflc-radius-pill);
+        font-size: var(--cflc-fs-xs);
+        font-weight: var(--cflc-fw-medium);
+      }
+
+      .pill-easy {
+        color: var(--cflc-easy-fg);
+        background: var(--cflc-easy-bg);
+      }
+
+      .pill-medium {
+        color: var(--cflc-medium-fg);
+        background: var(--cflc-medium-bg);
+      }
+
+      .pill-hard {
+        color: var(--cflc-hard-fg);
+        background: var(--cflc-hard-bg);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border: var(--cflc-border-width) solid var(--cflc-border);
+        border-radius: var(--cflc-radius-md);
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: var(--cflc-space-3);
+        text-align: left;
+        border-bottom: var(--cflc-border-width) solid var(--cflc-border);
+      }
+
+      th {
+        background: var(--cflc-surface);
+        color: var(--cflc-text-muted);
+        font-size: var(--cflc-fs-xs);
+        font-weight: var(--cflc-fw-medium);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      tbody tr:hover td {
+        background: var(--cflc-surface-hover);
+      }
+
+      tbody tr:last-child td {
+        border-bottom: 0;
+      }
+
+      a {
+        color: var(--cflc-link);
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: var(--cflc-link-hover);
+        text-decoration: underline;
+      }
+
+      .rank-legendary {
+        color: var(--cflc-rank-legendary);
+        font-weight: var(--cflc-fw-bold);
+      }
+      .rank-red {
+        color: var(--cflc-rank-red);
+      }
+      .rank-orange {
+        color: var(--cflc-rank-orange);
+      }
+      .rank-violet {
+        color: var(--cflc-rank-violet);
+      }
+      .rank-blue {
+        color: var(--cflc-rank-blue);
+      }
+      .rank-cyan {
+        color: var(--cflc-rank-cyan);
+      }
+      .rank-green {
+        color: var(--cflc-rank-green);
+      }
+      .rank-gray {
+        color: var(--cflc-rank-gray);
+      }
+      .rank-admin {
+        color: var(--cflc-rank-admin);
+      }
+
+      .note {
+        margin-top: var(--cflc-space-6);
+        padding-top: var(--cflc-space-4);
+        border-top: var(--cflc-border-width) solid var(--cflc-border);
+        color: var(--cflc-text-subtle);
+        font-size: var(--cflc-fs-sm);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <div>
+          <h1>cf-leetcode design tokens</h1>
+          <p class="lede">
+            Every value in <code>src/css/tokens.css</code>, rendered. This page is documentation
+            — it is not part of the extension.
+          </p>
+        </div>
+        <button id="toggle" type="button">Toggle theme</button>
+      </header>
+
+      <h2>Surfaces</h2>
+      <div class="grid" id="surfaces"></div>
+
+      <h2>Layering (as they actually nest)</h2>
+      <div class="layers">
+        <div class="layer-surface">
+          <code class="val">--cflc-surface</code> — a card
+          <div class="layer-raised" style="margin-top: 12px">
+            <code class="val">--cflc-surface-raised</code> — something on the card
+            <div class="layer-sunken" style="margin-top: 12px">
+              --cflc-surface-sunken &mdash; a code block
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Text</h2>
+      <div class="grid" id="text"></div>
+
+      <h2>Accent &amp; links</h2>
+      <div class="grid" id="accent"></div>
+
+      <h2>Difficulty pills (thresholds configurable)</h2>
+      <div class="pills">
+        <span class="pill pill-easy">Easy</span>
+        <span class="pill pill-medium">Medium</span>
+        <span class="pill pill-hard">Hard</span>
+        <span class="val">rating &le;1200 / 1300&ndash;1900 / &ge;2000</span>
+      </div>
+
+      <h2>Verdict colors</h2>
+      <div class="grid" id="verdict"></div>
+
+      <h2>Codeforces rank colors (preserved, not flattened)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Handle</th>
+            <th>Rank</th>
+            <th>Token</th>
+          </tr>
+        </thead>
+        <tbody id="ranks"></tbody>
+      </table>
+
+      <h2>Type scale</h2>
+      <div id="type"></div>
+
+      <p class="note">
+        Rank colors differ between themes on purpose: Codeforces picks them against a white
+        background, so blue, violet, green and gray are lifted on dark to stay readable, and the
+        light theme restores CF's exact values. Toggle the theme and watch the table.
+      </p>
+    </main>
+
+    <script>
+      const SURFACES = ['bg', 'surface', 'surface-raised', 'surface-hover', 'surface-sunken'];
+      const TEXT = ['text', 'text-muted', 'text-subtle', 'text-inverse'];
+      const ACCENT = ['accent', 'accent-hover', 'link', 'link-hover', 'focus-ring'];
+      const VERDICT = ['success', 'warning', 'danger', 'info'];
+      const RANKS = [
+        ['tourist', 'legendary grandmaster', 'legendary'],
+        ['Petr', 'international grandmaster', 'red'],
+        ['Um_nik', 'grandmaster', 'orange'],
+        ['neal', 'international master', 'violet'],
+        ['Errichto', 'expert', 'blue'],
+        ['SecondThread', 'specialist', 'cyan'],
+        ['pashka', 'pupil', 'green'],
+        ['newbie123', 'newbie', 'gray'],
+        ['MikeMirzayanov', 'admin', 'admin']
+      ];
+      const TYPE = ['xs', 'sm', 'base', 'md', 'lg', 'xl'];
+
+      const css = (name) =>
+        getComputedStyle(document.documentElement).getPropertyValue(`--cflc-${name}`).trim();
+
+      function swatches(id, names) {
+        document.getElementById(id).innerHTML = names
+          .map(
+            (n) => `
+              <div class="swatch">
+                <div class="chip" data-token="${n}"></div>
+                <div class="meta">
+                  <div class="name">--cflc-${n}</div>
+                  <div class="val" data-val="${n}"></div>
+                </div>
+              </div>`
+          )
+          .join('');
+      }
+
+      function paint() {
+        document.querySelectorAll('[data-token]').forEach((el) => {
+          el.style.background = `var(--cflc-${el.dataset.token})`;
+        });
+        document.querySelectorAll('[data-val]').forEach((el) => {
+          el.textContent = css(el.dataset.val);
+        });
+      }
+
+      swatches('surfaces', SURFACES);
+      swatches('text', TEXT);
+      swatches('accent', ACCENT);
+      swatches('verdict', VERDICT);
+
+      document.getElementById('ranks').innerHTML = RANKS.map(
+        ([handle, rank, token]) => `
+          <tr>
+            <td><a href="#" class="rank-${token}">${handle}</a></td>
+            <td class="val">${rank}</td>
+            <td class="val">--cflc-rank-${token}</td>
+          </tr>`
+      ).join('');
+
+      document.getElementById('type').innerHTML = TYPE.map(
+        (t) => `
+          <div style="font-size: var(--cflc-fs-${t}); margin-bottom: 8px">
+            <span>The quick brown fox jumps over the lazy dog</span>
+            <span class="val" style="font-size: var(--cflc-fs-xs)"> --cflc-fs-${t}</span>
+          </div>`
+      ).join('');
+
+      document.getElementById('toggle').addEventListener('click', () => {
+        const root = document.documentElement;
+        root.dataset.cfTheme = root.dataset.cfTheme === 'dark' ? 'light' : 'dark';
+        paint();
+      });
+
+      paint();
+    </script>
+  </body>
+</html>

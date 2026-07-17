@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>cf-leetcode options</title>
+    <link rel="stylesheet" href="../css/tokens.css" />
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1>cf-leetcode</h1>
+      <p class="lede">
+        Unofficial Codeforces reskin. Not affiliated with Codeforces or LeetCode.
+      </p>
+
+      <section class="card">
+        <h2>Theme</h2>
+        <label class="field">
+          <span>Appearance</span>
+          <select id="theme">
+            <option value="auto">Auto (follow system)</option>
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="card">
+        <h2>Features</h2>
+
+        <label class="field">
+          <span>
+            Split pane on problem pages
+            <small>Statement on the left, Codeforces' own submit form on the right.</small>
+          </span>
+          <input type="checkbox" id="splitPane" />
+        </label>
+
+        <label class="field">
+          <span>
+            Difficulty pills on the problemset
+            <small>Labels the rating column Easy / Medium / Hard.</small>
+          </span>
+          <input type="checkbox" id="difficultyPills" />
+        </label>
+
+        <label class="field">
+          <span>
+            Leave standings alone
+            <small>Skips the theme entirely on standings pages.</small>
+          </span>
+          <input type="checkbox" id="disableOnStandings" />
+        </label>
+      </section>
+
+      <section class="card">
+        <h2>Difficulty thresholds</h2>
+        <p class="hint">Based on the Codeforces problem rating.</p>
+
+        <label class="field">
+          <span>Easy is at most</span>
+          <input type="number" id="easyMax" min="0" max="4000" step="100" />
+        </label>
+
+        <label class="field">
+          <span>Hard is at least</span>
+          <input type="number" id="hardMin" min="0" max="4000" step="100" />
+        </label>
+
+        <p class="hint" id="thresholdPreview"></p>
+      </section>
+
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </main>
+
+    <script src="../js/browser-shim.js"></script>
+    <script src="../js/defaults.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

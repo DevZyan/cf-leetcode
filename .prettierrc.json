@@ -1,0 +1,11 @@
+{
+  "printWidth": 96,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "overrides": [
+    {
+      "files": ["*.json", "*.md"],
+      "options": { "singleQuote": false }
+    }
+  ]
+}

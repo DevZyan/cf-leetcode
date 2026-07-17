@@ -1,0 +1,212 @@
+/*
+ * cf-leetcode design tokens.
+ *
+ * Declarations only — this file must not change how any Codeforces page looks.
+ * Later stages consume these variables; stage 1 only publishes them.
+ *
+ * Original work. Colors are picked to evoke a dark, low-chroma coding-site
+ * palette; nothing here is copied from LeetCode's stylesheets or assets.
+ *
+ * Theme resolution:
+ *   html[data-cf-theme="dark"]   -> dark
+ *   html[data-cf-theme="light"]  -> light
+ *   html:not([data-cf-theme])    -> follows prefers-color-scheme (pre-bootstrap
+ *                                   state; exists to avoid a flash)
+ *
+ * "auto" is resolved to dark/light by bootstrap.js, not here, so that every
+ * later stylesheet only ever has to match two theme states. The user's raw
+ * preference stays visible as `data-cf-theme-pref`.
+ */
+
+:root {
+  /* ---- Surfaces: near-black base, each layer one step lighter ---- */
+  --cflc-bg: #1a1a1a;
+  --cflc-surface: #282828;
+  --cflc-surface-raised: #303030;
+  --cflc-surface-hover: #3a3a3a;
+  --cflc-surface-sunken: #141414;
+
+  /* ---- Borders: subtle 1px hairlines, never heavy shadows ---- */
+  --cflc-border: #3e3e3e;
+  --cflc-border-strong: #525252;
+  --cflc-border-width: 1px;
+
+  /* ---- Text ---- */
+  --cflc-text: #eff1f6;
+  --cflc-text-muted: #b3b3b3;
+  --cflc-text-subtle: #808080;
+  --cflc-text-inverse: #1a1a1a;
+
+  /* ---- Accent ---- */
+  --cflc-accent: #ffa116;
+  --cflc-accent-hover: #ffb84d;
+  --cflc-accent-contrast: #1a1a1a;
+  --cflc-link: #4d9de0;
+  --cflc-link-hover: #7fb8eb;
+  --cflc-focus-ring: #4d9de0;
+
+  /* ---- Difficulty pills (semantic; mapped from CF rating in JS) ---- */
+  --cflc-easy-fg: #00b8a3;
+  --cflc-easy-bg: rgb(0 184 163 / 12%);
+  --cflc-medium-fg: #ffb800;
+  --cflc-medium-bg: rgb(255 184 0 / 12%);
+  --cflc-hard-fg: #ff375f;
+  --cflc-hard-bg: rgb(255 55 95 / 12%);
+
+  /* ---- Verdict states ---- */
+  --cflc-success: #00b8a3;
+  --cflc-warning: #ffb800;
+  --cflc-danger: #ff375f;
+  --cflc-info: #4d9de0;
+
+  /* ---- Typography ---- */
+  --cflc-font-ui:
+    system-ui, -apple-system, 'Segoe UI', roboto, 'Helvetica Neue', arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --cflc-font-mono:
+    ui-monospace, sfmono-regular, 'SF Mono', 'Cascadia Mono', menlo, consolas,
+    'Liberation Mono', monospace;
+  --cflc-fs-xs: 0.75rem;
+  --cflc-fs-sm: 0.8125rem;
+  --cflc-fs-base: 0.875rem;
+  --cflc-fs-md: 1rem;
+  --cflc-fs-lg: 1.25rem;
+  --cflc-fs-xl: 1.5rem;
+  --cflc-lh-tight: 1.25;
+  --cflc-lh-base: 1.6;
+  --cflc-fw-normal: 400;
+  --cflc-fw-medium: 500;
+  --cflc-fw-bold: 600;
+
+  /* ---- Space scale (4px base) ---- */
+  --cflc-space-1: 4px;
+  --cflc-space-2: 8px;
+  --cflc-space-3: 12px;
+  --cflc-space-4: 16px;
+  --cflc-space-5: 24px;
+  --cflc-space-6: 32px;
+  --cflc-space-7: 48px;
+
+  /* ---- Radii ---- */
+  --cflc-radius-sm: 4px;
+  --cflc-radius-md: 8px;
+  --cflc-radius-lg: 12px;
+  --cflc-radius-pill: 999px;
+
+  /* ---- Layout ---- */
+  --cflc-content-max: 1200px;
+
+  /* ---- Motion ---- */
+  --cflc-transition: 120ms ease;
+
+  /*
+   * CF rating colors. Codeforces identity — deliberately preserved rather than
+   * flattened into the palette. CF picks these against a white background, so
+   * blue/violet/green/admin are lifted here to stay readable on #1a1a1a; the
+   * light theme restores CF's exact values.
+   */
+  --cflc-rank-legendary: #f33;
+  --cflc-rank-red: #f33;
+  --cflc-rank-orange: #ff8c00;
+  --cflc-rank-violet: #c56bd6;
+  --cflc-rank-blue: #6c8cff;
+  --cflc-rank-cyan: #03a89e;
+  --cflc-rank-green: #3cb371;
+  --cflc-rank-gray: #999;
+  --cflc-rank-admin: #eff1f6;
+}
+
+html[data-cf-theme='light'] {
+  --cflc-bg: #fff;
+  --cflc-surface: #f7f8fa;
+  --cflc-surface-raised: #fff;
+  --cflc-surface-hover: #eff1f6;
+  --cflc-surface-sunken: #f0f0f0;
+
+  --cflc-border: #e0e0e0;
+  --cflc-border-strong: #c4c4c4;
+
+  --cflc-text: #262626;
+  --cflc-text-muted: #5c5c5c;
+  --cflc-text-subtle: #8c8c8c;
+  --cflc-text-inverse: #fff;
+
+  --cflc-accent: #ffa116;
+  --cflc-accent-hover: #e08c00;
+  --cflc-accent-contrast: #262626;
+  --cflc-link: #0a66c2;
+  --cflc-link-hover: #084a8c;
+  --cflc-focus-ring: #0a66c2;
+
+  --cflc-easy-fg: #00857a;
+  --cflc-easy-bg: rgb(0 133 122 / 10%);
+  --cflc-medium-fg: #a86800;
+  --cflc-medium-bg: rgb(168 104 0 / 10%);
+  --cflc-hard-fg: #d61f3f;
+  --cflc-hard-bg: rgb(214 31 63 / 10%);
+
+  --cflc-success: #00857a;
+  --cflc-warning: #a86800;
+  --cflc-danger: #d61f3f;
+  --cflc-info: #0a66c2;
+
+  /* CF's own rank colors are tuned for a white background — use them as-is. */
+  --cflc-rank-legendary: red;
+  --cflc-rank-red: red;
+  --cflc-rank-violet: #a0a;
+  --cflc-rank-blue: #00f;
+  --cflc-rank-green: #008000;
+  --cflc-rank-gray: #808080;
+  --cflc-rank-admin: #000;
+}
+
+/*
+ * Pre-bootstrap fallback only. Duplicates the light block above because CSS
+ * has no way to alias one custom-property set from inside a media query.
+ * Keep the two in sync; `html:not([data-cf-theme])` stops applying the moment
+ * bootstrap.js sets the attribute.
+ */
+@media (prefers-color-scheme: light) {
+  html:not([data-cf-theme]) {
+    --cflc-bg: #fff;
+    --cflc-surface: #f7f8fa;
+    --cflc-surface-raised: #fff;
+    --cflc-surface-hover: #eff1f6;
+    --cflc-surface-sunken: #f0f0f0;
+
+    --cflc-border: #e0e0e0;
+    --cflc-border-strong: #c4c4c4;
+
+    --cflc-text: #262626;
+    --cflc-text-muted: #5c5c5c;
+    --cflc-text-subtle: #8c8c8c;
+    --cflc-text-inverse: #fff;
+
+    --cflc-accent: #ffa116;
+    --cflc-accent-hover: #e08c00;
+    --cflc-accent-contrast: #262626;
+    --cflc-link: #0a66c2;
+    --cflc-link-hover: #084a8c;
+    --cflc-focus-ring: #0a66c2;
+
+    --cflc-easy-fg: #00857a;
+    --cflc-easy-bg: rgb(0 133 122 / 10%);
+    --cflc-medium-fg: #a86800;
+    --cflc-medium-bg: rgb(168 104 0 / 10%);
+    --cflc-hard-fg: #d61f3f;
+    --cflc-hard-bg: rgb(214 31 63 / 10%);
+
+    --cflc-success: #00857a;
+    --cflc-warning: #a86800;
+    --cflc-danger: #d61f3f;
+    --cflc-info: #0a66c2;
+
+    --cflc-rank-legendary: red;
+    --cflc-rank-red: red;
+    --cflc-rank-violet: #a0a;
+    --cflc-rank-blue: #00f;
+    --cflc-rank-green: #008000;
+    --cflc-rank-gray: #808080;
+    --cflc-rank-admin: #000;
+  }
+}

@@ -1,0 +1,7 @@
+node_modules
+dist
+
+# Raw Codeforces DOM captures. Never reformat these — they are evidence, and
+# rewriting them invalidates the file:line citations in SELECTORS.md.
+docs/html dump
+docs/html-dumps

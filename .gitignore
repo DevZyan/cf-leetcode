@@ -1,0 +1,21 @@
+node_modules/
+dist/
+web-ext-artifacts/
+*.xpi
+*.zip
+.DS_Store
+Thumbs.db
+.web-extension-id
+
+# Raw Codeforces DOM captures and debug screenshots. These contain a real
+# handle and a CSRF token — they are local evidence, not publishable material.
+docs/html dump/
+docs/html-dumps/
+docs/*.htm
+docs/*.html
+docs/Screenshot*.png
+docs/*.jpg
+docs/*.jpeg
+
+# ...but the token reference page is documentation and should ship.
+!docs/palette.html

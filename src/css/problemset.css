@@ -1,0 +1,59 @@
+/*
+ * Problemset list. Pills are injected by problemset.js; the table styling
+ * below stands on its own if JS is disabled.
+ */
+
+html[data-cf-theme] .datatable table.problems td.id a {
+  color: var(--cflc-text-muted);
+}
+
+html[data-cf-theme] .datatable table.problems td {
+  vertical-align: middle;
+}
+
+/* Tag links: CF renders these as `.notice` in a right-floated div. */
+html[data-cf-theme] .datatable table.problems a.notice {
+  background: var(--cflc-surface-hover);
+  border-radius: var(--cflc-radius-pill);
+  color: var(--cflc-text-subtle) !important;
+  display: inline-block;
+  margin-left: var(--cflc-space-1);
+  padding: 0 var(--cflc-space-2);
+}
+
+html[data-cf-theme] .datatable table.problems a.notice:hover {
+  color: var(--cflc-text) !important;
+}
+
+/* --------------------------------------------------------------- pills -- */
+
+/* Our own element, so it may carry its own type. */
+html[data-cf-theme] .cflc-pill {
+  border-radius: var(--cflc-radius-pill);
+  display: inline-block;
+  font-size: var(--cflc-fs-xs);
+  font-weight: var(--cflc-fw-medium);
+  line-height: 1.7;
+  padding: 0 var(--cflc-space-3);
+  white-space: nowrap;
+}
+
+html[data-cf-theme] .cflc-pill-easy {
+  background: var(--cflc-easy-bg);
+  color: var(--cflc-easy-fg);
+}
+
+html[data-cf-theme] .cflc-pill-medium {
+  background: var(--cflc-medium-bg);
+  color: var(--cflc-medium-fg);
+}
+
+html[data-cf-theme] .cflc-pill-hard {
+  background: var(--cflc-hard-bg);
+  color: var(--cflc-hard-fg);
+}
+
+html[data-cf-theme] .cflc-pill-rating {
+  color: var(--cflc-text-subtle);
+  margin-left: var(--cflc-space-2);
+}

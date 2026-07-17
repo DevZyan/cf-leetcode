@@ -1,0 +1,302 @@
+/*
+ * Baseline global theme.
+ *
+ * Only selectors marked `Verified: yes` in SELECTORS.md are used here.
+ * Everything is scoped under [data-cf-theme] so that if bootstrap.js never
+ * runs, Codeforces renders untouched.
+ *
+ * Codeforces paints most surfaces with inline `style="background-color: ..."`
+ * and with images for rounded corners, so a fair number of `!important`s are
+ * unavoidable. Each one is there to beat an inline style, not to win a
+ * specificity fight with our own rules.
+ */
+
+/*
+ * Typography is Codeforces'. We recolor and relayout; we do not restyle type.
+ * No font-family, font-size, text-transform or letter-spacing rules belong in
+ * this file — the site keeps its own voice.
+ */
+html[data-cf-theme] body {
+  background: var(--cflc-bg) !important;
+  color: var(--cflc-text);
+}
+
+/*
+ * CF paints white/near-white backgrounds on the page containers themselves.
+ * Missing these is what leaves light rectangles behind transparent tables and
+ * above the second-level menu, since anything we set to `transparent` shows
+ * whatever container sits underneath.
+ */
+html[data-cf-theme] body,
+html[data-cf-theme] #body,
+html[data-cf-theme] #pageContent,
+html[data-cf-theme] .content-with-sidebar,
+html[data-cf-theme] #sidebar {
+  background-color: var(--cflc-bg) !important;
+  background-image: none !important;
+  color: var(--cflc-text);
+}
+
+/* ---------------------------------------------------------------- links -- */
+
+html[data-cf-theme] a {
+  color: var(--cflc-link);
+}
+
+html[data-cf-theme] a:hover {
+  color: var(--cflc-link-hover);
+}
+
+/*
+ * Rating-colored handles are deliberately exempt. CF colors them via classes
+ * we have not verified yet (see SELECTORS.md), so we neither recolor them nor
+ * let the generic link rule above capture them.
+ */
+html[data-cf-theme] a.rated-user {
+  color: revert;
+}
+
+/* --------------------------------------------------------------- header -- */
+
+html[data-cf-theme] #header {
+  background: var(--cflc-bg);
+  color: var(--cflc-text);
+}
+
+/*
+ * The CF wordmark is a PNG with a baked-in white background, so on a near-black
+ * page it renders as a white slab. `invert` flips the white plate to near-black
+ * and the dark lettering to light; `hue-rotate(180deg)` puts the brand hues back
+ * where they started, since invert alone would swing the blue to orange.
+ *
+ * This is a workaround, not a fix — the honest answer is our own mark.
+ */
+html[data-cf-theme='dark'] #header img[alt='Codeforces'] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html[data-cf-theme] .menu-list-container {
+  background: var(--cflc-surface) !important;
+  border: var(--cflc-border-width) solid var(--cflc-border);
+  border-radius: var(--cflc-radius-md);
+}
+
+html[data-cf-theme] .menu-list-container ul.menu-list {
+  background: transparent !important;
+}
+
+html[data-cf-theme] .menu-list-container a {
+  color: var(--cflc-text-muted);
+  transition:
+    color var(--cflc-transition),
+    background var(--cflc-transition);
+}
+
+html[data-cf-theme] .menu-list-container a:hover {
+  background: var(--cflc-surface-hover) !important;
+  color: var(--cflc-text);
+}
+
+html[data-cf-theme] .menu-list-container li.current > a,
+html[data-cf-theme] .menu-list-container li.backLava > a {
+  background: var(--cflc-surface-hover) !important;
+  color: var(--cflc-accent);
+}
+
+/* Second-level tab strip (contest pages). CF paints it and its <li>s white. */
+html[data-cf-theme] .second-level-menu,
+html[data-cf-theme] ul.second-level-menu-list,
+html[data-cf-theme] ul.second-level-menu-list li {
+  background-color: var(--cflc-bg) !important;
+  background-image: none !important;
+  border-bottom: var(--cflc-border-width) solid var(--cflc-border);
+}
+
+html[data-cf-theme] ul.second-level-menu-list li a {
+  color: var(--cflc-text-muted);
+}
+
+html[data-cf-theme] ul.second-level-menu-list li.current a,
+html[data-cf-theme] ul.second-level-menu-list li.selectedLava a {
+  color: var(--cflc-accent);
+}
+
+/*
+ * CF's "lava lamp" highlight — a div its JS injects behind the active tab and
+ * animates between tabs. It is not in any DOM capture because it only exists at
+ * runtime, but it is plainly the white pill in the screenshots. Its own
+ * background is a light image, hence both overrides.
+ */
+html[data-cf-theme] .backLava,
+html[data-cf-theme] .lavaLamp,
+html[data-cf-theme] li.backLava {
+  background-color: var(--cflc-surface-hover) !important;
+  background-image: none !important;
+  border-radius: var(--cflc-radius-sm);
+}
+
+/* ------------------------------------------------------- roundbox cards -- */
+
+html[data-cf-theme] .roundbox {
+  background: var(--cflc-surface) !important;
+  border: var(--cflc-border-width) solid var(--cflc-border) !important;
+  border-radius: var(--cflc-radius-md) !important;
+  box-shadow: none !important;
+}
+
+/*
+ * CF fakes rounded corners with four empty spacer divs carrying corner images.
+ * border-radius does the job now, so the spacers are dead weight.
+ */
+html[data-cf-theme] .roundbox > .lt,
+html[data-cf-theme] .roundbox > .rt,
+html[data-cf-theme] .roundbox > .lb,
+html[data-cf-theme] .roundbox > .rb,
+html[data-cf-theme] .datatable > .lt,
+html[data-cf-theme] .datatable > .rt,
+html[data-cf-theme] .datatable > .lb,
+html[data-cf-theme] .datatable > .rb {
+  display: none !important;
+}
+
+html[data-cf-theme] .roundbox .caption,
+html[data-cf-theme] .roundbox .caption.titled {
+  background: transparent !important;
+  color: var(--cflc-text);
+  border-bottom: var(--cflc-border-width) solid var(--cflc-border);
+}
+
+/* ------------------------------------------------------------- tables --- */
+
+html[data-cf-theme] .datatable {
+  background: var(--cflc-surface) !important;
+  border: var(--cflc-border-width) solid var(--cflc-border);
+  border-radius: var(--cflc-radius-md);
+  padding-bottom: 0 !important;
+  overflow: hidden;
+}
+
+html[data-cf-theme] .datatable table,
+html[data-cf-theme] table.rtable {
+  background-color: var(--cflc-surface) !important;
+  border-collapse: collapse;
+  color: var(--cflc-text);
+}
+
+/* CF zebra-stripes rows with `td.dark` (a light grey on its light theme). */
+html[data-cf-theme] .datatable td.dark,
+html[data-cf-theme] table.rtable td.dark {
+  background-color: var(--cflc-surface-raised) !important;
+}
+
+html[data-cf-theme] .datatable th,
+html[data-cf-theme] table.rtable th {
+  background: var(--cflc-surface-sunken) !important;
+  border: 0 !important;
+  border-bottom: var(--cflc-border-width) solid var(--cflc-border) !important;
+  color: var(--cflc-text-muted) !important;
+}
+
+html[data-cf-theme] .datatable td,
+html[data-cf-theme] table.rtable td {
+  background-color: var(--cflc-surface) !important;
+  border: 0 !important;
+  border-bottom: var(--cflc-border-width) solid var(--cflc-border) !important;
+  color: var(--cflc-text);
+}
+
+html[data-cf-theme] .datatable tr:hover td {
+  background: var(--cflc-surface-hover) !important;
+}
+
+html[data-cf-theme] .datatable tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+/* CF marks "you solved this" rows green and "you failed" rows red inline. */
+html[data-cf-theme] .datatable tr.accepted-problem td {
+  background: var(--cflc-easy-bg) !important;
+}
+
+/* -------------------------------------------------------------- prose --- */
+
+html[data-cf-theme] .ttypography {
+  color: var(--cflc-text);
+  line-height: var(--cflc-lh-base);
+}
+
+html[data-cf-theme] .ttypography h1,
+html[data-cf-theme] .ttypography h2,
+html[data-cf-theme] .ttypography h3 {
+  color: var(--cflc-text);
+}
+
+html[data-cf-theme] pre,
+html[data-cf-theme] code,
+html[data-cf-theme] .ttypography pre {
+  background: var(--cflc-surface-sunken) !important;
+  border: var(--cflc-border-width) solid var(--cflc-border) !important;
+  border-radius: var(--cflc-radius-sm);
+  color: var(--cflc-text);
+}
+
+/* ------------------------------------------------------------ controls -- */
+
+html[data-cf-theme] input[type='text'],
+html[data-cf-theme] input[type='password'],
+html[data-cf-theme] input[type='number'],
+html[data-cf-theme] input[type='search'],
+html[data-cf-theme] select,
+html[data-cf-theme] textarea {
+  background: var(--cflc-surface-raised);
+  border: var(--cflc-border-width) solid var(--cflc-border-strong);
+  border-radius: var(--cflc-radius-sm);
+  color: var(--cflc-text);
+}
+
+html[data-cf-theme] input:focus-visible,
+html[data-cf-theme] select:focus-visible,
+html[data-cf-theme] textarea:focus-visible {
+  outline: 2px solid var(--cflc-focus-ring);
+  outline-offset: 1px;
+}
+
+html[data-cf-theme] input.submit,
+html[data-cf-theme] input[type='submit'],
+html[data-cf-theme] button {
+  background: var(--cflc-accent);
+  background-image: none;
+  border: 0;
+  border-radius: var(--cflc-radius-sm);
+  color: var(--cflc-accent-contrast);
+  cursor: pointer;
+  padding: var(--cflc-space-2) var(--cflc-space-4);
+  transition: background var(--cflc-transition);
+}
+
+html[data-cf-theme] input.submit:hover,
+html[data-cf-theme] input[type='submit']:hover,
+html[data-cf-theme] button:hover {
+  background: var(--cflc-accent-hover);
+}
+
+/* -------------------------------------------------------------- footer -- */
+
+html[data-cf-theme] #footer {
+  background: var(--cflc-bg);
+  border-top: var(--cflc-border-width) solid var(--cflc-border);
+  color: var(--cflc-text-subtle);
+}
+
+/* --------------------------------------------------------------- misc --- */
+
+html[data-cf-theme] .notice,
+html[data-cf-theme] .small,
+html[data-cf-theme] .smaller {
+  color: var(--cflc-text-subtle);
+}
+
+html[data-cf-theme] hr {
+  border: 0;
+  border-top: var(--cflc-border-width) solid var(--cflc-border);
+}

@@ -1,0 +1,23 @@
+{
+  "name": "cf-leetcode",
+  "version": "0.1.0",
+  "description": "Firefox extension that reskins Codeforces with a LeetCode-inspired design system.",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "web-ext run",
+    "lint": "npm run lint:ext && npm run lint:css && npm run lint:format",
+    "lint:ext": "web-ext lint",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "lint:format": "prettier --check .",
+    "format": "prettier --write .",
+    "build": "web-ext build --overwrite-dest"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "stylelint": "^16.9.0",
+    "stylelint-config-standard": "^36.0.1",
+    "web-ext": "^8.3.0"
+  }
+}

@@ -1,0 +1,360 @@
+/*
+ * Problem statement page + LeetCode-style split pane.
+ *
+ * The split layout only engages once problem.js has added `cflc-split` to
+ * <html>. Without JS, the statement restyle below still applies and the page
+ * keeps CF's normal single-column flow.
+ */
+
+/* ------------------------------------------------------- statement body -- */
+
+/* Recolor and relayout only — Codeforces keeps its own typography. */
+html[data-cf-theme] .problem-statement {
+  color: var(--cflc-text);
+}
+
+html[data-cf-theme] .problem-statement > .header {
+  border-bottom: var(--cflc-border-width) solid var(--cflc-border);
+  margin-bottom: var(--cflc-space-5);
+  padding-bottom: var(--cflc-space-4);
+  text-align: left;
+}
+
+html[data-cf-theme] .problem-statement > .header .title {
+  color: var(--cflc-text);
+  margin-bottom: var(--cflc-space-3);
+}
+
+/*
+ * CF stacks limits as four centered blocks. Lay them out as one muted
+ * metadata row instead.
+ */
+html[data-cf-theme] .problem-statement > .header .time-limit,
+html[data-cf-theme] .problem-statement > .header .memory-limit,
+html[data-cf-theme] .problem-statement > .header .input-file,
+html[data-cf-theme] .problem-statement > .header .output-file {
+  color: var(--cflc-text-subtle);
+  display: inline-block;
+  margin-right: var(--cflc-space-4);
+}
+
+html[data-cf-theme] .problem-statement .property-title {
+  color: var(--cflc-text-subtle);
+  display: inline;
+}
+
+html[data-cf-theme] .problem-statement .property-title::after {
+  content: ': ';
+}
+
+html[data-cf-theme] .problem-statement .section-title {
+  color: var(--cflc-text);
+  margin-bottom: var(--cflc-space-2);
+  margin-top: var(--cflc-space-5);
+}
+
+html[data-cf-theme] .problem-statement .input-specification,
+html[data-cf-theme] .problem-statement .output-specification,
+html[data-cf-theme] .problem-statement .note {
+  margin-top: var(--cflc-space-4);
+}
+
+html[data-cf-theme] .problem-statement .note {
+  border-left: 2px solid var(--cflc-border-strong);
+  padding-left: var(--cflc-space-4);
+}
+
+/* ------------------------------------------------------------- samples -- */
+
+html[data-cf-theme] .problem-statement .sample-test {
+  display: grid;
+  gap: var(--cflc-space-3);
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (width <= 900px) {
+  html[data-cf-theme] .problem-statement .sample-test {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*
+ * CF gives the sample <pre> a white background of its own. Where that ends and
+ * our container begins reads as a hairline of leftover white, so the box, the
+ * title and the pre all have to agree on the surface.
+ */
+html[data-cf-theme] .problem-statement .sample-test .input,
+html[data-cf-theme] .problem-statement .sample-test .output {
+  background-color: var(--cflc-surface-sunken) !important;
+  border: var(--cflc-border-width) solid var(--cflc-border);
+  border-radius: var(--cflc-radius-md);
+  overflow: hidden;
+}
+
+html[data-cf-theme] .problem-statement .sample-test .title {
+  background: var(--cflc-surface);
+  border-bottom: var(--cflc-border-width) solid var(--cflc-border);
+  color: var(--cflc-text-muted);
+  margin: 0;
+  padding: var(--cflc-space-2) var(--cflc-space-3);
+}
+
+html[data-cf-theme] .problem-statement .sample-test pre {
+  background-color: var(--cflc-surface-sunken) !important;
+  border: 0 !important;
+  border-radius: 0;
+  margin: 0;
+  padding: var(--cflc-space-3);
+}
+
+/*
+ * Multi-testcase samples: CF wraps each line in `.test-example-line` and
+ * zebra-stripes them with light backgrounds, which land as white bars across a
+ * dark sample box. CF's own JS reads these class names on hover to line up the
+ * input and output rows, so only their color is touched — never their layout.
+ */
+html[data-cf-theme] .problem-statement .test-example-line {
+  color: var(--cflc-text);
+}
+
+html[data-cf-theme] .problem-statement .test-example-line-even {
+  background-color: var(--cflc-surface) !important;
+}
+
+html[data-cf-theme] .problem-statement .test-example-line-odd {
+  background-color: var(--cflc-surface-sunken) !important;
+}
+
+/* CF's copy-sample button, injected by its own JS. Leave behavior alone. */
+html[data-cf-theme] .problem-statement .input-output-copier {
+  background: var(--cflc-surface-raised);
+  border: var(--cflc-border-width) solid var(--cflc-border);
+  border-radius: var(--cflc-radius-sm);
+  color: var(--cflc-text-subtle);
+}
+
+/*
+ * Math. Layout, fonts and geometry stay MathJax's — the only thing changed is
+ * the ink color, because MathJax resolves to black and black on #1a1a1a is
+ * invisible. `.tex-span` covers older problems (4A), the `mjx-*` and `MathJax*`
+ * names cover the MathJax versions CF may serve; whichever is absent simply
+ * matches nothing. Scoped to statement prose so no other math is touched.
+ */
+html[data-cf-theme] .ttypography .tex-span,
+html[data-cf-theme] .ttypography .tex-formula,
+html[data-cf-theme] .ttypography mjx-container,
+html[data-cf-theme] .ttypography .MathJax,
+html[data-cf-theme] .ttypography .MathJax_CHTML,
+html[data-cf-theme] .ttypography .mjx-chtml,
+html[data-cf-theme] .ttypography .MathJax_SVG {
+  color: var(--cflc-text) !important;
+}
+
+/* SVG output paints with fill, not color. */
+html[data-cf-theme] .ttypography mjx-container svg,
+html[data-cf-theme] .ttypography .MathJax_SVG svg {
+  fill: currentcolor;
+}
+
+html[data-cf-theme] .ttypography mjx-container svg [fill='black'],
+html[data-cf-theme] .ttypography mjx-container svg [stroke='black'] {
+  fill: currentcolor;
+  stroke: currentcolor;
+}
+
+/* ---------------------------------------------------------- split pane -- */
+
+/*
+ * Engaged by problem.js. #sidebar and #pageContent are siblings inside #body,
+ * with #sidebar first in the DOM and floated right by CF. We drop the float
+ * and drive both from a grid on the parent.
+ */
+
+/* The sidebar's contents (Submit?, contest info) are redundant next to the
+   editor pane, and it would fight the grid for width. */
+html[data-cf-theme].cflc-split #sidebar {
+  display: none !important;
+}
+
+html[data-cf-theme].cflc-split #pageContent.cflc-pane-left {
+  box-sizing: border-box;
+  float: none !important;
+  margin: 0 !important;
+  overflow-y: auto;
+  padding-right: var(--cflc-space-5);
+  width: auto !important;
+}
+
+html[data-cf-theme].cflc-split .cflc-split-root {
+  align-items: stretch;
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(320px, 1fr) 6px minmax(320px, 1fr);
+  height: calc(100vh - var(--cflc-split-top, 140px));
+  min-height: 420px;
+}
+
+html[data-cf-theme].cflc-split .cflc-pane-right {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+html[data-cf-theme].cflc-split .cflc-gutter {
+  background: var(--cflc-border);
+  cursor: col-resize;
+  transition: background var(--cflc-transition);
+}
+
+html[data-cf-theme].cflc-split .cflc-gutter:hover,
+html[data-cf-theme].cflc-split .cflc-gutter.cflc-dragging {
+  background: var(--cflc-accent);
+}
+
+html[data-cf-theme].cflc-split .cflc-pane-right-header {
+  align-items: center;
+  background: var(--cflc-surface);
+  border: var(--cflc-border-width) solid var(--cflc-border);
+  border-bottom: 0;
+  border-radius: var(--cflc-radius-md) var(--cflc-radius-md) 0 0;
+  color: var(--cflc-text-muted);
+  display: flex;
+  font-size: var(--cflc-fs-xs);
+  font-weight: var(--cflc-fw-medium);
+  gap: var(--cflc-space-2);
+  justify-content: space-between;
+  letter-spacing: 0.04em;
+  padding: var(--cflc-space-2) var(--cflc-space-3);
+  text-transform: uppercase;
+}
+
+html[data-cf-theme].cflc-split .cflc-pane-right-header a {
+  color: var(--cflc-text-subtle);
+  text-transform: none;
+}
+
+/* Holds CF's relocated submit form. */
+html[data-cf-theme].cflc-split .cflc-pane-body {
+  background: var(--cflc-bg);
+  border: var(--cflc-border-width) solid var(--cflc-border);
+  border-radius: 0 0 var(--cflc-radius-md) var(--cflc-radius-md);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--cflc-space-3);
+}
+
+/*
+ * The form arrives styled as a narrow sidebar widget — CF sets a fixed em width
+ * on it and lays it out with a table. Let it fill the pane instead.
+ */
+html[data-cf-theme].cflc-split .cflc-pane-body form.submitForm {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  width: auto !important;
+}
+
+html[data-cf-theme].cflc-split .cflc-pane-body .table-form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  width: 100% !important;
+}
+
+html[data-cf-theme].cflc-split .cflc-pane-body tbody,
+html[data-cf-theme].cflc-split .cflc-pane-body tr {
+  display: contents;
+}
+
+html[data-cf-theme].cflc-split .cflc-pane-body td {
+  display: block;
+  padding: var(--cflc-space-1) 0;
+}
+
+/* The row holding the textarea is the one that should absorb spare height. */
+html[data-cf-theme].cflc-split .cflc-pane-body td:has(> .cflc-source) {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+html[data-cf-theme].cflc-split .cflc-source {
+  background: var(--cflc-surface-sunken);
+  border: var(--cflc-border-width) solid var(--cflc-border);
+  border-radius: var(--cflc-radius-sm);
+  color: var(--cflc-text);
+  flex: 1;
+  font-family: var(--cflc-font-mono);
+  font-size: var(--cflc-fs-sm);
+  line-height: 1.5;
+  min-height: 300px;
+  padding: var(--cflc-space-3);
+  resize: none;
+  tab-size: 4;
+  white-space: pre;
+  width: 100%;
+}
+
+html[data-cf-theme].cflc-split .cflc-pane-body .submit {
+  width: 100%;
+}
+
+html[data-cf-theme].cflc-split .cflc-pane-fallback {
+  border: var(--cflc-border-width) solid var(--cflc-border);
+  border-radius: 0 0 var(--cflc-radius-md) var(--cflc-radius-md);
+  border-top: 0;
+  color: var(--cflc-text-muted);
+  padding: var(--cflc-space-5);
+  text-align: center;
+}
+
+/* --------------------------------------------------------- ACE editor --- */
+
+/*
+ * Codeforces ships the ACE editor with a light theme, which stays a white slab
+ * on a dark page. Everything below is scoped under `#editor` (verified) so if
+ * CF ever swaps editors these rules match nothing rather than misfire. The
+ * `.ace_*` names are ACE's own public API, not CF markup.
+ *
+ * Syntax token colors are deliberately left to ACE. Recoloring them would mean
+ * shipping a whole theme, and ACE's light tokens stay legible here.
+ */
+html[data-cf-theme='dark'] #editor,
+html[data-cf-theme='dark'] #editor .ace_gutter,
+html[data-cf-theme='dark'] #editor .ace_scroller,
+html[data-cf-theme='dark'] #editor .ace_content {
+  background-color: var(--cflc-surface-sunken) !important;
+  color: var(--cflc-text);
+}
+
+html[data-cf-theme='dark'] #editor .ace_gutter {
+  background-color: var(--cflc-bg) !important;
+  border-right: var(--cflc-border-width) solid var(--cflc-border);
+  color: var(--cflc-text-subtle) !important;
+}
+
+html[data-cf-theme='dark'] #editor .ace_gutter-active-line {
+  background-color: var(--cflc-surface-hover) !important;
+}
+
+html[data-cf-theme='dark'] #editor .ace_marker-layer .ace_active-line {
+  background-color: var(--cflc-surface) !important;
+}
+
+html[data-cf-theme='dark'] #editor .ace_marker-layer .ace_selection {
+  background-color: rgb(77 157 224 / 30%) !important;
+}
+
+html[data-cf-theme='dark'] #editor .ace_cursor {
+  color: var(--cflc-text) !important;
+}
+
+html[data-cf-theme='dark'] #editor .ace_print-margin {
+  background-color: var(--cflc-border) !important;
+}

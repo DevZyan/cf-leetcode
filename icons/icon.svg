@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="cf-leetcode">
+  <title>cf-leetcode</title>
+  <rect width="96" height="96" rx="20" fill="#1a1a1a" />
+  <rect x="0.5" y="0.5" width="95" height="95" rx="19.5" fill="none" stroke="#3e3e3e" />
+  <g fill="none" stroke="#ffa116" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M38 30 20 48l18 18" />
+    <path d="M58 30l18 18-18 18" />
+  </g>
+</svg>
